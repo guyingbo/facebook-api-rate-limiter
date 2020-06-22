@@ -60,6 +60,11 @@ class Strategy:
             d = json.loads(headers["x-app-usage"])
             max_percentage = max(d.values())
             self._cache["app-usage"] = max_percentage
+        # fb ads insights throttle strategy
+        if "x-fb-ads-insights-throttle" in headers:
+            d = json.loads(headers["x-fb-ads-insights-throttle"])
+            max_percentage = max(d.values())
+            self._cache["fb-ads-insights-throttle"] = max_percentage
 
     def check_keys(self, keys: List[Tuple[str, str]]) -> bool:
         return all(self.check(key) for key in keys)
